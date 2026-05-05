@@ -1,6 +1,6 @@
 # Better YouTube
 
-<img src="/icon/icon128.png" width="80" align="right" alt="Better YouTube icon"/>
+<img src="icons/icon128.png" width="80" align="right" alt="BetterYouTube icon"/>
 
 A lightweight Chrome extension that fixes three annoyances on YouTube — Pitch black theme, Comments panel position, Category bar.
 
