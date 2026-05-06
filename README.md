@@ -1,5 +1,7 @@
 # Better YouTube
 
+<img src="icons/icon128.png" width="80" align="right" alt="BetterYouTube icon"/>
+
 A lightweight Chrome extension that fixes three annoyances on YouTube — no settings UI, no trackers, no bloat. Load it and forget it.
 
 ---
