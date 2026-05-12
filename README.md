@@ -68,6 +68,7 @@ Better YouTube/
 ## Notes
 
 - Requires YouTube's own dark mode to be enabled (the grey overrides only apply to `html[dark]`)
+- Keep Ambient mode disabled
 - No permissions beyond `*://www.youtube.com/*` — the extension cannot read data from any other site
 - No background service worker, no storage, no network requests
 
