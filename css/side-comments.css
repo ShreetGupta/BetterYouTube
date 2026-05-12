@@ -5,107 +5,168 @@
    ═══════════════════════════════════════════════ */
 
 :root {
-  --sc-w      : 420px;
-  --sc-top    : 56px;
-  --sc-gap    : 10px;
-  --sc-radius : 6px;
-  --sc-surface: var(--yt-spec-base-background,  #fff);
-  --sc-border : var(--yt-spec-10-percent-layer, rgba(0,0,0,.1));
+  --sc-w: 420px;
+  --sc-top: 56px;
+  --sc-gap: 10px;
+  --sc-radius: 6px;
+  --sc-surface: var(--yt-spec-base-background, #fff);
+  --sc-border: var(--yt-spec-10-percent-layer, rgba(0, 0, 0, .1));
 }
 
 /* ── Two-column layout ── */
 .sc-active #columns {
-  display     : flex !important;
-  flex-flow   : row nowrap !important;
-  align-items : flex-start !important;
-  gap         : 0 !important;
-  max-width   : 100% !important;
+  display: flex !important;
+  flex-flow: row nowrap !important;
+  align-items: flex-start !important;
+  gap: 0 !important;
+  max-width: 100% !important;
 }
 
 .sc-active #primary {
-  flex         : 1 1 auto !important;
-  min-width    : 0 !important;
-  max-width    : none !important;
-  margin-right : var(--sc-gap) !important;
+  flex: 1 1 auto !important;
+  min-width: 0 !important;
+  max-width: none !important;
+  margin-right: var(--sc-gap) !important;
 }
 
 /* ── Secondary: sticky, viewport height, scrollable ── */
 .sc-active #secondary {
-  flex           : 0 0 var(--sc-w) !important;
-  position       : sticky !important;
-  top            : var(--sc-top) !important;
-  height         : calc(100vh - var(--sc-top)) !important;
-  overflow-y     : auto !important;
-  overflow-x     : hidden !important;
+  flex: 0 0 var(--sc-w) !important;
+  position: sticky !important;
+  top: var(--sc-top) !important;
+  height: calc(100vh - var(--sc-top)) !important;
+  overflow-y: auto !important;
+  overflow-x: hidden !important;
   scrollbar-width: thin !important;
   scrollbar-color: var(--sc-border) transparent !important;
-  padding        : 8px 0 24px !important;
-  box-sizing     : border-box !important;
+  padding: 8px 0 24px !important;
+  box-sizing: border-box !important;
 }
 
-.sc-active #secondary::-webkit-scrollbar       { width: 5px; }
-.sc-active #secondary::-webkit-scrollbar-thumb { background: var(--sc-border); border-radius: 99px; }
+.sc-active #secondary::-webkit-scrollbar {
+  width: 5px;
+}
+
+.sc-active #secondary::-webkit-scrollbar-thumb {
+  background: var(--sc-border);
+  border-radius: 99px;
+}
 
 /* ── Comments card ── */
 .sc-active #comments.sc-comments {
-  width          : 100% !important;
-  height         : 77.5vh !important;
-  max-height     : 77.5vh !important;
-  overflow-y     : auto !important;
-  overflow-x     : hidden !important;
-  background     : var(--sc-surface) !important;
-  border         : 2px solid var(--sc-border) !important;
-  border-radius  : var(--sc-radius) !important;
-  padding        : 0 !important;
-  margin         : 5px 0 var(--sc-gap) !important;
-  box-sizing     : border-box !important;
+  width: 100% !important;
+  height: 77.5vh !important;
+  max-height: 77.5vh !important;
+  overflow-y: auto !important;
+  overflow-x: hidden !important;
+  background: var(--sc-surface) !important;
+  border: 2px solid var(--sc-border) !important;
+  border-radius: var(--sc-radius) !important;
+  padding: 0 !important;
+  margin: 5px 0 var(--sc-gap) !important;
+  box-sizing: border-box !important;
   scrollbar-width: thin !important;
   scrollbar-color: var(--sc-border) transparent !important;
-  box-shadow     : 0 1px 8px rgba(0,0,0,.08) !important;
-  animation      : sc-in 200ms cubic-bezier(.4,0,.2,1) both;
+  box-shadow: 0 1px 8px rgba(0, 0, 0, .08) !important;
+  animation: sc-in 200ms cubic-bezier(.4, 0, .2, 1) both;
+  position: relative !important;
 }
 
-.sc-active #comments.sc-comments::-webkit-scrollbar       { width: 4px; }
-.sc-active #comments.sc-comments::-webkit-scrollbar-thumb { background: var(--sc-border); border-radius: 99px; }
+.sc-active #comments.sc-comments::-webkit-scrollbar {
+  width: 4px;
+}
+
+.sc-active #comments.sc-comments::-webkit-scrollbar-thumb {
+  background: var(--sc-border);
+  border-radius: 99px;
+}
 
 @keyframes sc-in {
-  from { opacity: 0; transform: translateY(6px); }
-  to   { opacity: 1; transform: translateY(0); }
+  from {
+    opacity: 0;
+    transform: translateY(6px);
+  }
+
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+/* ── Loading spinner (shown until comments arrive) ── */
+.sc-active #comments.sc-comments:not(.sc-loaded)::after {
+  content: '';
+  position: absolute;
+  inset: 0;
+  z-index: 10;
+  background: var(--sc-surface);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.sc-active #comments.sc-comments:not(.sc-loaded)::before {
+  content: '';
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  z-index: 11;
+  width: 28px;
+  height: 28px;
+  margin: -14px 0 0 -14px;
+  border: 3px solid var(--sc-border);
+  border-top-color: var(--yt-spec-text-primary, #f1f1f1);
+  border-radius: 50%;
+  animation: sc-spin .8s linear infinite;
+}
+
+@keyframes sc-spin {
+  to {
+    transform: rotate(360deg);
+  }
+}
+
+/* Hide YouTube's native skeletons / ghost cards inside comments panel */
+.sc-active #comments.sc-comments:not(.sc-loaded) #ghost-cards,
+.sc-active #comments.sc-comments:not(.sc-loaded) ytd-comment-skeleton-renderer,
+.sc-active #comments.sc-comments:not(.sc-loaded) #header ytd-continuation-item-renderer,
+.sc-active #comments.sc-comments:not(.sc-loaded)>#sections>ytd-item-section-renderer>#contents>ytd-continuation-item-renderer {
+  display: none !important;
 }
 
 /* Strip YouTube's internal top spacing */
-.sc-active #comments.sc-comments > #sections,
-.sc-active #comments.sc-comments #sections > ytd-item-section-renderer,
-.sc-active #comments.sc-comments ytd-item-section-renderer > #header {
-  margin-top  : 0 !important;
-  padding-top : 0 !important;
+.sc-active #comments.sc-comments>#sections,
+.sc-active #comments.sc-comments #sections>ytd-item-section-renderer,
+.sc-active #comments.sc-comments ytd-item-section-renderer>#header {
+  margin-top: 0 !important;
+  padding-top: 0 !important;
 }
 
 /* Sticky comments header */
 .sc-active #comments.sc-comments ytd-comments-header-renderer {
-  position       : sticky !important;
-  top            : 0 !important;
-  z-index        : 1 !important;
-  background     : var(--sc-surface) !important;
-  padding-top    : 12px !important;
-  padding-bottom : 8px !important;
-  margin-top     : 0 !important;
+  position: sticky !important;
+  top: 0 !important;
+  z-index: 1 !important;
+  background: var(--sc-surface) !important;
+  padding-top: 12px !important;
+  padding-bottom: 8px !important;
+  margin-top: 0 !important;
 }
 
 /* Padding for header + threads */
 .sc-active #comments.sc-comments ytd-comments-header-renderer,
 .sc-active #comments.sc-comments ytd-comment-thread-renderer {
-  padding-left  : 12px !important;
-  padding-right : 8px !important;
+  padding-left: 12px !important;
+  padding-right: 8px !important;
 }
 
 .sc-active #comments.sc-comments #simplebox-placeholder,
 .sc-active #comments.sc-comments ytd-commentbox {
-  padding-left  : 12px !important;
-  padding-right : 12px !important;
+  padding-left: 12px !important;
+  padding-right: 12px !important;
 }
 
-.sc-active #comments.sc-comments ytd-item-section-renderer > #contents {
+.sc-active #comments.sc-comments ytd-item-section-renderer>#contents {
   padding-bottom: 12px !important;
 }
 
@@ -114,26 +175,28 @@
 .sc-active #secondary-inner ytd-compact-video-renderer,
 .sc-active #secondary-inner ytd-compact-radio-renderer,
 .sc-active #secondary-inner ytd-compact-playlist-renderer {
-  width    : 100% !important;
+  width: 100% !important;
   max-width: 100% !important;
 }
 
 /* ── Dark mode ── */
 html[dark] {
-  --sc-surface : var(--yt-spec-base-background, #0f0f0f);
-  --sc-border  : var(--yt-spec-10-percent-layer, rgba(255,255,255,.1));
+  --sc-surface: var(--yt-spec-base-background, #0f0f0f);
+  --sc-border: var(--yt-spec-10-percent-layer, rgba(255, 255, 255, .1));
 }
 
 html[dark] .sc-active #comments.sc-comments {
-  box-shadow: 0 1px 8px rgba(0,0,0,.35) !important;
+  box-shadow: 0 1px 8px rgba(0, 0, 0, .35) !important;
 }
 
-html[dark] .sc-active #comments.sc-comments ytd-comments-header-renderer {
-  background: var(--yt-spec-base-background, #0f0f0f) !important;
-}
 
 /* ── Narrow viewport ── */
 @media (max-width: 1099px) {
-  .sc-active #secondary { display: none !important; }
-  .sc-active #primary   { margin-right: 0 !important; }
+  .sc-active #secondary {
+    display: none !important;
+  }
+
+  .sc-active #primary {
+    margin-right: 0 !important;
+  }
 }

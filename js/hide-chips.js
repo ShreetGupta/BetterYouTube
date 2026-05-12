@@ -6,20 +6,17 @@
   ];
 
   function nuke() {
-    TARGETS.forEach(sel => {
-      document.querySelectorAll(sel).forEach(el => el.remove());
-    });
+    TARGETS.forEach(sel =>
+      document.querySelectorAll(sel).forEach(el => el.remove())
+    );
   }
 
-  // Run immediately
   nuke();
 
-  // Watch for elements being (re)added by YouTube's SPA
-  new MutationObserver(nuke).observe(document.documentElement, {
-    childList: true,
-    subtree: true,
-  });
-
-  // Belt-and-suspenders: also poll every 500ms
-  setInterval(nuke, 500);
+  // Debounced observer — one pass per frame, not on every mutation
+  let timer = null;
+  new MutationObserver(() => {
+    if (timer) return;
+    timer = requestAnimationFrame(() => { timer = null; nuke(); });
+  }).observe(document.documentElement, { childList: true, subtree: true });
 })();
