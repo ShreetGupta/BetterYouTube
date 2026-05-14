@@ -2,7 +2,7 @@
   "manifest_version": 3,
   "name": "Better YouTube",
   "short_name": "Better YouTube",
-  "version": "2.8",
+  "version": "2.9",
   "description": "A no-nonsense YouTube enhancement: soft grey dark mode, side comments panel, and no category chips.",
   "browser_specific_settings": {
     "gecko": {

@@ -12,25 +12,33 @@ let activated = false;
 let nudgeTmr = null;
 let playlistObs = null;
 let loadedObs = null;
+let lastVideoUrl = null;
 
 const isWatch = () => location.href.includes(WATCH);
+
+const currentVideoKey = () => {
+  try { return new URL(location.href).searchParams.get('v') || ''; }
+  catch { return ''; }
+};
 
 function commentsReady() {
   const c = document.getElementById('comments');
   return c && !c.hasAttribute('hidden') && c.innerHTML.length > 100;
 }
 
-function cleanup() {
+function cleanup(resetLoaded = false) {
   obs1?.disconnect(); obs1 = null;
   playlistObs?.disconnect(); playlistObs = null;
   loadedObs?.disconnect(); loadedObs = null;
   if (interval) { clearInterval(interval); interval = null; }
   activated = false;
-  const c = document.getElementById('comments');
-  if (c) {
-    c.classList.remove('sc-loaded');
-    // Clear cached comment threads so YouTube re-fetches for the new video
-    c.querySelectorAll('ytd-comment-thread-renderer').forEach(el => el.remove());
+  if (resetLoaded) {
+    const c = document.getElementById('comments');
+    if (c) {
+      c.classList.remove('sc-loaded');
+      // Clear old comment threads so stale content doesn't trigger premature sc-loaded
+      c.querySelectorAll('ytd-comment-thread-renderer').forEach(el => el.remove());
+    }
   }
 }
 
@@ -80,9 +88,18 @@ function watchAndCollapsePlaylist() {
 function detect() {
   if (!isWatch()) return;
   watchAndCollapsePlaylist();
+
+  // Apply layout + spinner classes early so our spinner shows instead of YouTube's skeletons
+  const c = document.getElementById('comments');
+  const secInner = document.querySelector('#secondary-inner');
+  if (c && secInner) {
+    document.documentElement.classList.add('sc-active');
+    c.classList.add('sc-comments');
+    if (c.parentElement !== secInner) secInner.prepend(c);
+  }
+
   if (tryActivate()) return;
 
-  const c = document.getElementById('comments');
   if (c?.hasAttribute('hidden')) {
     obs1 = new MutationObserver(() => {
       if (!c.hasAttribute('hidden')) {
@@ -142,20 +159,64 @@ function activate() {
   }
 }
 
+function handleSameVideoLayout() {
+  // Same video — layout change (miniplayer/expanded/theater toggle)
+  // Re-ensure comments are in the sidebar without resetting state
+  const comments = document.getElementById('comments');
+  const secInner = document.querySelector('#secondary-inner');
+  if (!comments || !secInner) return;
+
+  document.documentElement.classList.add('sc-active');
+  if (comments.parentElement !== secInner) {
+    secInner.prepend(comments);
+  }
+  comments.classList.add('sc-comments');
+
+  // Re-apply loaded state if comment threads still exist
+  if (!comments.classList.contains('sc-loaded') && comments.querySelector('ytd-comment-thread-renderer')) {
+    comments.classList.add('sc-loaded');
+  }
+
+  if (!activated) {
+    // Was deactivated (e.g. returning from miniplayer) — re-detect
+    detect();
+  } else {
+    nudge();
+  }
+}
+
 document.addEventListener('yt-navigate-finish', () => {
   if (!isWatch()) {
     document.documentElement.classList.remove('sc-active');
     document.getElementById('comments')?.classList.remove('sc-comments');
-    cleanup();
+    cleanup();           // soft — don't remove sc-loaded, don't null lastVideoUrl
     return;
   }
-  cleanup();
+  const key = currentVideoKey();
+  if (key && key === lastVideoUrl) {
+    handleSameVideoLayout();
+    return;
+  }
+  lastVideoUrl = key;
+  cleanup(true);        // hard — remove sc-loaded for the new video
   detect();
 });
 
+// YouTube also fires this on player mode changes (miniplayer, theater, etc.)
+document.addEventListener('yt-page-data-updated', () => {
+  if (!isWatch()) return;
+  const key = currentVideoKey();
+  if (key && key === lastVideoUrl) {
+    handleSameVideoLayout();
+  }
+});
+
 if (document.readyState === 'loading') {
-  document.addEventListener('DOMContentLoaded', () => { if (isWatch()) detect(); });
+  document.addEventListener('DOMContentLoaded', () => {
+    if (isWatch()) { lastVideoUrl = currentVideoKey(); detect(); }
+  });
 } else if (isWatch()) {
+  lastVideoUrl = currentVideoKey();
   detect();
 }
 

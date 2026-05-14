@@ -134,6 +134,14 @@
   display: none !important;
 }
 
+/* Also hide skeletons AFTER comments have loaded — prevents them
+   from flashing when YouTube re-renders during player mode changes
+   (miniplayer ↔ expanded, theater toggle, etc.) */
+.sc-active #comments.sc-comments.sc-loaded #ghost-cards,
+.sc-active #comments.sc-comments.sc-loaded ytd-comment-skeleton-renderer {
+  display: none !important;
+}
+
 /* Strip YouTube's internal top spacing */
 .sc-active #comments.sc-comments>#sections,
 .sc-active #comments.sc-comments #sections>ytd-item-section-renderer,
