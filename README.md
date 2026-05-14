@@ -8,11 +8,11 @@ A lightweight Chrome extension that fixes three annoyances on YouTube — Dark g
 
 ## FEATURES
 
-**🦗 Dark Grey Dark Mode**
+**🐢 Dark Grey Dark Mode**
 
-**🦗 Side Comments Panel**
+**🐢 Side Comments Panel**
 
-**🦗 Hide Category Bar**
+**🐢 Hide Category Bar**
 
 ---
 
