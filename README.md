@@ -33,7 +33,9 @@ For updating you can just replace the folder, browser will load it automatically
 
 Store link:
 
-[![Get it on Firefox Add-ons](https://blog.mozilla.org/addons/files/2020/04/get-the-addon-fx-apr-2020.svg)](https://addons.mozilla.org/en-US/firefox/addon/perfectyt/)
+<a href="https://addons.mozilla.org/en-US/firefox/addon/perfectyt/">
+  <img src="https://blog.mozilla.org/addons/files/2020/04/get-the-addon-fx-apr-2020.svg" height="60" alt="Get it on Firefox Add-ons">
+</a>
 
 ---
 
