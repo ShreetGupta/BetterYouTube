@@ -33,13 +33,18 @@ Removed via both CSS and a DOM observer so it stays gone even after YouTube's SP
 
 ## Install
 
-1. Download or clone this repo
-2. Go to `chrome://extensions`
+You can load it manually in any browser and It is also available in Firefox addon store.
+
+**Manual laoding Steps**:
+1. Download this repo as zip and extract it.
+2. Go to your browser's extensions page.
 3. Enable **Developer mode** (toggle, top-right)
 4. Click **Load unpacked**
 5. Select the `Better YouTube` folder
 
 That's it. The extension activates automatically on `youtube.com`.
+
+[![Firefox Add-ons](https://img.shields.io/amo/v/perfectyt)](https://addons.mozilla.org/en-US/firefox/addon/perfectyt/)
 
 ---
 
