@@ -103,7 +103,7 @@ function detect() {
   if (c?.hasAttribute('hidden')) {
     obs1 = new MutationObserver(() => {
       if (!c.hasAttribute('hidden')) {
-        obs1.disconnect(); obs1 = null;
+        obs1?.disconnect(); obs1 = null;
         if (!tryActivate()) startInterval();
       }
     });

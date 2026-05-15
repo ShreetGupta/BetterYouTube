@@ -2,17 +2,17 @@
 
 <img src="icons/icon128.png" width="80" align="right" alt="BetterYouTube icon"/>
 
-A lightweight Chrome extension that fixes three annoyances on YouTube — Replacing the harsh pitch black with Dark grey theme, Side comments panel, Hides category chips.
+A lightweight Chrome extension that fixes three annoyances on YouTube — Dark grey theme, Side comments panel, Hides category chips.
 
 ---
 
 ## FEATURES
 
-**🐢 Dark Grey Dark Mode**
+**🦗 Dark Grey Dark Mode**
 
-**🐢 Side Comments Panel**
+**🦗 Side Comments Panel**
 
-**🐢 Hide Category Bar**
+**🦗 Hide Category Bar**
 
 ---
 
@@ -33,9 +33,7 @@ For updating you can just replace the folder, browser will load it automatically
 
 Store link:
 
-<a href="https://addons.mozilla.org/en-US/firefox/addon/perfectyt/">
-  <img src="https://blog.mozilla.org/addons/files/2020/04/get-the-addon-fx-apr-2020.svg" height="60" alt="Get it on Firefox Add-ons">
-</a>
+[![Firefox Add-ons](https://img.shields.io/amo/v/perfectyt)](https://addons.mozilla.org/en-US/firefox/addon/perfectyt/)
 
 ---
 
