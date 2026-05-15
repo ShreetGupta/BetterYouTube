@@ -1,6 +1,6 @@
 # BetterYouTube Extension — Complete Logic Documentation
 
-> Extension version: **2.9.3** | Manifest: **MV3** | Target: `*://www.youtube.com/*`
+> Manifest: **MV3** | Target: `*://www.youtube.com/*`
 
 ---
 
