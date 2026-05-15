@@ -223,11 +223,24 @@ if (document.readyState === 'loading') {
 function nudge() {
   clearInterval(nudgeTmr);
   const sec = document.querySelector('#secondary');
-  const fire = () => {
-    window.dispatchEvent(new Event('resize'));
-    if (sec) { sec.scrollTop = 1; requestAnimationFrame(() => { sec.scrollTop = 0; }); }
-  };
-  fire();
+
+  // One-time scrollTop jiggle to force layout recalculation
+  if (sec) { sec.scrollTop = 1; requestAnimationFrame(() => { sec.scrollTop = 0; }); }
+  window.dispatchEvent(new Event('resize'));
+
+  // Subsequent nudges only fire resize events (no scrollTop reset)
   let t = 0;
-  nudgeTmr = setInterval(() => { fire(); if (++t >= 8) clearInterval(nudgeTmr); }, 500);
+  nudgeTmr = setInterval(() => {
+    window.dispatchEvent(new Event('resize'));
+    if (++t >= 4) clearInterval(nudgeTmr);
+  }, 500);
+
+  // Cancel nudge immediately if user scrolls the sidebar
+  if (sec) {
+    const cancel = () => {
+      clearInterval(nudgeTmr);
+      sec.removeEventListener('scroll', cancel);
+    };
+    sec.addEventListener('scroll', cancel, { passive: true });
+  }
 }

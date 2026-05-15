@@ -187,6 +187,20 @@
   max-width: 100% !important;
 }
 
+/* Collapse "load more" spinners in related videos so they take
+   zero visual space.  Videos still load via infinite scroll —
+   the 1px element triggers YouTube's IntersectionObserver — but
+   appear seamlessly without any spinner gap between batches. */
+.sc-active ytd-watch-next-secondary-results-renderer ytd-continuation-item-renderer {
+  height: 1px !important;
+  min-height: 0 !important;
+  padding: 0 !important;
+  margin: 0 !important;
+  overflow: hidden !important;
+  opacity: 0 !important;
+  pointer-events: none !important;
+}
+
 /* ── Dark mode ── */
 html[dark] {
   --sc-surface: var(--yt-spec-base-background, #0f0f0f);
