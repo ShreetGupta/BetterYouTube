@@ -1,4 +1,4 @@
-// Better YouTube — hide popup bar in fullscreen
+// PipeShift — hide popup bar in fullscreen
 
 function handleFullscreen() {
   const isFullscreen = !!(

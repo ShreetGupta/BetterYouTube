@@ -1,17 +1,19 @@
 {
   "manifest_version": 3,
-  "name": "Better YouTube",
-  "short_name": "Better YouTube",
+  "name": "PipeShift",
+  "short_name": "PipeShift",
   "version": "2.9.5",
-  "description": "A no-nonsense YouTube enhancement: soft grey dark mode, side comments panel, and no category chips.",
+  "description": "PipeShift \u2014 a no-nonsense YouTube enhancement: soft grey dark mode, side comments panel, and no category chips.",
   "browser_specific_settings": {
     "gecko": {
-      "id": "better-youtube@frosty.dev",
+      "id": "pipeshift@frosty.dev",
       "strict_min_version": "140.0",
       "data_collection_permissions": {
-      "required": ["none"],
-      "optional": []
-       }
+        "required": [
+          "none"
+        ],
+        "optional": []
+      }
     }
   },
   "action": {
@@ -20,7 +22,7 @@
       "48": "icons/icon48.png",
       "128": "icons/icon128.png"
     },
-    "default_title": "Better YouTube is active"
+    "default_title": "PipeShift is active"
   },
   "icons": {
     "16": "icons/icon16.png",
@@ -29,15 +31,30 @@
   },
   "content_scripts": [
     {
-      "matches": ["*://www.youtube.com/*"],
-      "css": ["css/theme.css", "css/hide-chips.css"],
-      "js": ["js/fullscreen.js", "js/hide-chips.js", "js/playlist-hide.js"],
+      "matches": [
+        "*://www.youtube.com/*"
+      ],
+      "css": [
+        "css/theme.css",
+        "css/hide-chips.css"
+      ],
+      "js": [
+        "js/fullscreen.js",
+        "js/hide-chips.js",
+        "js/playlist-hide.js"
+      ],
       "run_at": "document_start"
     },
     {
-      "matches": ["*://www.youtube.com/*"],
-      "css": ["css/side-comments.css"],
-      "js": ["js/side-comments.js"]
+      "matches": [
+        "*://www.youtube.com/*"
+      ],
+      "css": [
+        "css/side-comments.css"
+      ],
+      "js": [
+        "js/side-comments.js"
+      ]
     }
   ]
 }

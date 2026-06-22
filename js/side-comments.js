@@ -1,5 +1,5 @@
 /*
- * Better YouTube — Side Comments
+ * PipeShift — Side Comments
  * - Comments panel in right sidebar
  * - Playlist auto-collapsed on load via native button (user can expand freely)
  */

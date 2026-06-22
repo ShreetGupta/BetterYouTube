@@ -1,6 +1,6 @@
-# Better YouTube
+# PipeShift
 
-<img src="icons/icon128.png" width="80" align="right" alt="BetterYouTube icon"/>
+<img src="icons/icon128.png" width="80" align="right" alt="PipeShift icon"/>
 
 A lightweight Chrome extension that fixes three annoyances on YouTube — Replacing the harsh pitch black with dark grey theme, Side comments panel, Hides category bar.
 
@@ -24,7 +24,7 @@ You can load it manually in any browser and It is also available in Firefox addo
 2. Go to your browser's extensions page.
 3. Enable **Developer mode** (toggle, top-right)
 4. Click **Load unpacked**
-5. Select the `Better YouTube` folder
+5. Select the `PipeShift` folder
 
 That's it. The extension activates automatically on `youtube.com`.
 Make sure not to delete the folder or the extension will be removed.
