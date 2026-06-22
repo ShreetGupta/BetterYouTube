@@ -6,7 +6,7 @@
   "description": "PipeShift \u2014 a no-nonsense YouTube enhancement: soft grey dark mode, side comments panel, and no category chips.",
   "browser_specific_settings": {
     "gecko": {
-      "id": "pipeshift@frosty.dev",
+      "id": "pipeshift@frostx.dev",
       "strict_min_version": "140.0",
       "data_collection_permissions": {
         "required": [
