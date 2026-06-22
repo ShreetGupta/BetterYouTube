@@ -2,7 +2,7 @@
 
 <img src="icons/icon128.png" width="80" align="right" alt="PipeShift icon"/>
 
-A lightweight Chrome extension that fixes three annoyances on YouTube — Replacing the harsh pitch black with dark grey theme, Side comments panel, Hides category bar.
+A lightweight browser extension that fixes three annoyances on YouTube — Replacing the harsh pitch black with dark grey theme, Side comments panel, Hides category bar.
 
 ---
 
